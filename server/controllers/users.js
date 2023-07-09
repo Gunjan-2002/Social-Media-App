@@ -5,6 +5,7 @@ import User from "../models/User.js";
 export const getAllUser = async (req, res) => {
   try {
     const user = await User.find();
+    console.log(user);
     res.status(200).json({
       status: "success",
       message: "All User's Fetched Succesfully",
@@ -43,7 +44,7 @@ export const getUserFriends = async (req, res) => {
       user.friends.map((id) => User.findById(id))
     );
     const formattedFriends = friends.map(
-      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+      ({ _id, firstName, lastName, occupation, location, picturePath, dp }) => {
         return {
           _id,
           firstName,
@@ -51,6 +52,7 @@ export const getUserFriends = async (req, res) => {
           occupation,
           location,
           picturePath,
+          dp,
         };
       }
     );
@@ -89,7 +91,7 @@ export const addRemoveFriend = async (req, res) => {
       user.friends.map((id) => User.findById(id))
     );
     const formattedFriends = friends.map(
-      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+      ({ _id, firstName, lastName, occupation, location, picturePath, dp }) => {
         return {
           _id,
           firstName,
@@ -97,6 +99,7 @@ export const addRemoveFriend = async (req, res) => {
           occupation,
           location,
           picturePath,
+          dp,
         };
       }
     );

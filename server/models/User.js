@@ -17,7 +17,6 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      min: 2,
       max: 50,
       unique: true,
     },
@@ -27,13 +26,24 @@ const UserSchema = new mongoose.Schema(
       min: 5,
     },
     picturePath: {
+      public_id: {
+        type: String,
+        // required: true,
+      },
+      url: {
+        type: String,
+        // required: true,
+      },
+    },
+    dp: {
       type: String,
-      default: "",
     },
-    friends: {
-      type: Array,
-      default: [],
-    },
+    friends: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     location: String,
     occupation: String,
     viewedProfile: Number,
@@ -44,3 +54,9 @@ const UserSchema = new mongoose.Schema(
 
 const User = mongoose.model("User", UserSchema);
 export default User;
+
+
+// friends: {
+//   type: Array,
+//   default: [],
+// },
